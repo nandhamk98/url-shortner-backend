@@ -1,5 +1,6 @@
 import express from "express";
 import { userRouter } from "./Routes/userRoute.js";
+import { urlShortnerRouter } from "./Routes/urlShortnerRoute.js";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 
@@ -18,6 +19,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/api/user", userRouter);
+app.use("/api/urlShortner", urlShortnerRouter);
 
 app.listen(PORT, () => {
   console.log(`Listening to port ${PORT}`);
