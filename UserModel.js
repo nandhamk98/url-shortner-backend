@@ -30,6 +30,14 @@ const userSchema = new Schema(
       min: 15,
       max: 50,
     },
+    token: {
+      type: "String",
+      unique: true,
+    },
+    activation: {
+      type: "String",
+      unique: true,
+    },
   },
   { timestamps: true }
 );
