@@ -10,8 +10,6 @@ router.post("/create", async (req, res) => {
       ...data,
       count: 0,
     });
-
-    console.log(data);
     await newShortner.save();
     res.status(200).json({ id: newShortner._id });
   } catch (err) {
@@ -20,7 +18,7 @@ router.post("/create", async (req, res) => {
   return;
 });
 
-router.get("/get-shortners", async (req, res) => {
+router.post("/get-shortners", async (req, res) => {
   const data = req.body;
 
   const shortners = await urlShortner.find(data);

@@ -3,6 +3,7 @@ import { userRouter } from "./Routes/userRoute.js";
 import { urlShortnerRouter } from "./Routes/urlShortnerRoute.js";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import cors from "cors";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ mongoose
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.use("/api/user", userRouter);
 app.use("/api/urlShortner", urlShortnerRouter);
