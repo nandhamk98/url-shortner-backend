@@ -127,8 +127,10 @@ router.post("/forgotPassword", async function (req, res) {
   if (postCheck) {
     const update = await user.updateOne({ email: email }, { token: token });
     data = await sendMail(email, token, "resetPassword");
+    res.status(200).send({ message: "mail sent" });
+  } else {
+    res.status(500).send({ message: "Email not found" });
   }
-  res.send(data);
   return;
 });
 
@@ -148,9 +150,9 @@ router.post("/updatePassword", async function (req, res) {
         $unset: { token: token },
       }
     );
-    res.send({ msg: "Succussfully updated password" });
+    res.send({ message: "Succussfully updated password" });
   } else {
-    res.status(400).send({ errorMsg: "Incorrect Token" });
+    res.status(400).send({ message: "Incorrect Token" });
   }
   return;
 });
@@ -162,7 +164,7 @@ router.post("/activate-account", async (req, res) => {
     checkData = await user.updateOne({ _id: id }, { activation: true });
     res.status(200).send({ message: "Successfully activated account" });
   } else {
-    res.status(500).send({ errorMsg: "Account doesn't exist" });
+    res.status(500).send({ message: "Account doesn't exist" });
   }
   return;
 });
