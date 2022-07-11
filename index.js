@@ -1,24 +1,19 @@
 import express from "express";
 import dotenv from "dotenv";
-// import mongoose from "mongoose";
+import mongoose from "mongoose";
 import cors from "cors";
 import { userRouter } from "./UserRoute.js";
 import { urlShortnerRouter } from "./UrlShortnerRoute.js";
-import { MongoClient } from "mongodb";
 
 dotenv.config();
 
 const PORT = process.env.PORT;
-const MONGO_URL = process.env.MONGO_URL;
-// console.log(MONGO_URL);
-async function createConnection() {
-  const client = new MongoClient(MONGO_URL);
-  await client.connect();
-  console.log("db connected");
-  return client;
-}
-
-export const client = await createConnection();
+mongoose
+  .connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+  })
+  .then(() => console.log("connected to DB"))
+  .catch((err) => console.error(`Connection Failed : ${err}`));
 
 const app = express();
 
