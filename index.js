@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
 import { userRouter } from "./UserRoute.js";
-import { urlShortnerRouter } from "./Routes/UrlShortnerRoute.js";
+import { urlShortnerRouter } from "./UrlShortnerRoute.js";
 
 dotenv.config();
 
