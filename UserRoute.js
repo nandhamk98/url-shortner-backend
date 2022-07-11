@@ -101,19 +101,19 @@ router.post("/login", async (req, res) => {
       if (val.activation) {
         const password = await bcrypt.compare(req.body.password, val.password);
         if (!password) {
-          res.status(500).json({ message: "username or password not valid" });
+          res.status(500).send({ message: "username or password not valid" });
         } else {
-          res.status(200).json({ id: val._id, username: val.firstname });
+          res.status(200).send({ id: val._id, username: val.firstname });
         }
       } else {
-        res.send(403).json({ message: "Account is not activated" });
+        res.status(403).send({ message: "Account is not activated" });
       }
     } else {
-      res.status(500).json({ message: "email not found" });
+      res.status(500).send({ message: "email not found" });
     }
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Invalid credentials" });
+    res.status(500).send({ message: "Invalid credentials" });
   }
   return;
 });
