@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { urlShortner } from "../Models/urlShortnerModel.js";
+import { urlShortner } from "../Models/UrlShortnerModel.js";
 
 const router = Router();
 
