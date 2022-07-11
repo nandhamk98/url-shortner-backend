@@ -4,10 +4,15 @@ const { Schema, model } = mongoose;
 
 const userSchema = new Schema(
   {
-    username: {
+    firstname: {
       type: "String",
       required: true,
       unique: true,
+      min: 8,
+      max: 25,
+    },
+    lastname: {
+      type: "String",
       min: 8,
       max: 25,
     },

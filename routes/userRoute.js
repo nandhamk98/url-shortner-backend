@@ -10,7 +10,8 @@ router.post("/register", async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
     const newUser = new user({
-      username: req.body.username,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
       email: req.body.email,
       password: hashedPassword,
     });
@@ -18,24 +19,25 @@ router.post("/register", async (req, res) => {
     await newUser.save();
     res.status(200).json({ id: newUser._id });
   } catch (err) {
-    res.status(500).json({ message: "username already exists" });
+    console.error(err);
+    res.status(500).json({ message: "username already exists", err });
   }
   return;
 });
 
 router.post("/login", async (req, res) => {
   try {
-    const val = await user.findOne({ username: req.body.username });
+    const val = await user.findOne({ email: req.body.email });
 
     if (val) {
       const password = await bcrypt.compare(req.body.password, val.password);
       if (!password) {
         res.status(500).json({ message: "username or password not valid" });
       } else {
-        res.status(200).json({ id: val._id });
+        res.status(200).json({ id: val._id, username: val.firstname });
       }
     } else {
-      res.status(500).json({ message: "username not found" });
+      res.status(500).json({ message: "email not found" });
     }
   } catch (err) {
     console.log(err);
