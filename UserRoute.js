@@ -85,7 +85,7 @@ router.post("/register", async (req, res) => {
     });
 
     await newUser.save();
-    data = await sendMail(req.body.email, token, "activateAccounnt");
+    data = await sendMail(req.body.email, newUser._id, "activateAccounnt");
     res.status(200).json({ id: newUser._id });
   } catch (err) {
     console.error(err);
