@@ -129,6 +129,7 @@ router.post("/forgotPassword", async function (req, res) {
     data = await sendMail(email, token, "resetPassword");
   }
   res.send(data);
+  return;
 });
 
 router.post("/updatePassword", async function (req, res) {
@@ -151,6 +152,7 @@ router.post("/updatePassword", async function (req, res) {
   } else {
     res.status(400).send({ errorMsg: "Incorrect Token" });
   }
+  return;
 });
 
 router.post("/activate-account", async (req, res) => {
